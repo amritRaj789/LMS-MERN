@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Navbar from "./components/Navbar";
+import PageNotFound from "./components/PageNotFound";
 
 
 
@@ -49,6 +50,7 @@ function App (){
         <Route path="/" element={<Home user={user} error={error}/>}></Route>
         <Route path="/login" element={user ? <Navigate to="/" /> : <Login setUser={setUser}/>}></Route>
         <Route path="/register" element={user ? <Navigate to="/" /> : <Register setUser={setUser}/>}></Route>
+        <Route path="*" element={<PageNotFound />}></Route>
       </Routes>
     </Router>
   )
