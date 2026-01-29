@@ -15,6 +15,21 @@ const Register = ({setUser}) => {
 
   let navigate = useNavigate();
 
+  const validateForm = (data) => {
+    let {email, password, phone, address} = data;
+    // html forms is already doing this, may skip
+    // if(!email.includes('@') || !email.includes('.com')) return "Please check Email Id";
+    if(password.length < 9) return "Password must be longer than 8 characters";
+    if(phone[0] == '0') return "Phone cannot start with 0";
+    if(phone.length != 10) return "Phone must be 10 characters long";
+    if(isNaN(phone)) return "Phone must be all numerical";
+    if(address.trim().length == 0) return "Please check Address";
+
+    return "All correct";
+
+  }
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -25,20 +40,29 @@ const Register = ({setUser}) => {
     e.preventDefault();
     console.log("Inside handleRegister : ", formData);
 
-    try {
-      const res = await axios.post('/api/users/register', formData);
-
-      console.log("response object: ", res.data);
-      
-      setUser(res.data);
-      localStorage.setItem("token", res.data.token);
-      
-      navigate('/');
-    } catch (err) {
-      // may also setError
-      console.log("Couldn't Register User. ", err.message);
-      //setError(err.response?.data?.message || "Registration Failed");
+    // validate form first
+    const formValidationMsg = validateForm(formData);
+    // console.log("validation message", formValidationMsg);
+    if(formValidationMsg != "All correct"){
+      window.alert(formValidationMsg);
     }
+    else{
+      try {
+        const res = await axios.post('/api/users/register', formData);
+
+        console.log("response object: ", res.data);
+        
+        setUser(res.data);
+        localStorage.setItem("token", res.data.token);
+        
+        navigate('/');
+      } catch (err) {
+        // may also setError
+        console.log("Couldn't Register User. ", err.message);
+        //setError(err.response?.data?.message || "Registration Failed");
+      }
+    }
+    
   };
 
   
