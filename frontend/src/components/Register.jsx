@@ -17,7 +17,7 @@ const Register = ({setUser}) => {
 
   const validateForm = (data) => {
     let {email, password, phone, address} = data;
-    // html forms is already doing this, may skip
+    // html forms is already doing email check, may skip
     // if(!email.includes('@') || !email.includes('.com')) return "Please check Email Id";
     if(password.length < 9) return "Password must be longer than 8 characters";
     if(phone[0] == '0') return "Phone cannot start with 0";
@@ -61,8 +61,7 @@ const Register = ({setUser}) => {
         console.log("Couldn't Register User. ", err.message);
         //setError(err.response?.data?.message || "Registration Failed");
       }
-    }
-    
+    }  
   };
 
   
