@@ -1,6 +1,30 @@
+import { useState } from 'react';
 import {Link} from 'react-router';
+import axios from "axios";
 
-const Home = ({user, error}) => {
+const Home = ({user, setUser, error}) => {
+
+    const [showForm, setShowForm] = useState(false);
+    const [username, setUsername] = useState("");
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log("New username:", username);
+        setShowForm(false); // hide form after submit
+
+        try {
+            // send a post request
+            console.log("the user data of logged in user: ", user);
+            const res = await axios.post('/api/users/update', {username: username, id: user._id}); // username is new, id is old
+            // update only the username in frontend
+            setUser(prev => ({ ...prev, username: res.data.username}));
+
+        } catch (error) {
+            // catch any error
+            console.log("Error in catch block: ", error);
+        }
+    };
+
     return(
         <div className="home-style min-h-screen flex-column ">
             <div className="mb-8">
@@ -15,6 +39,22 @@ const Home = ({user, error}) => {
                     <p className="text-gray-400">You are logged in with Email Id: {user.email}</p>
                     <div className='mt-8 rounded-lg bg-gray-200 w-sm'>
                         <Link className='text-2xl text-white font-bold' to='/dashboard'>Checkout Dashboard</Link>
+                        <button className='my-4' onClick={() => setShowForm(!showForm)}>
+                            Change Username
+                        </button>
+                        {showForm && (
+                            <form onSubmit={handleSubmit} style={{ marginTop: "10px", marginBottom: "30px"}}>
+                            <input
+                                className='text-gray-900 p-2'
+                                type="text"
+                                placeholder="Enter new username"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                required
+                            />
+                            <button type="submit">Save</button>
+                            </form>
+                        )}
                     </div>
                 </div> ) :
                 (<div>

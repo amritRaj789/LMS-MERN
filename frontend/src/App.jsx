@@ -48,7 +48,7 @@ function App (){
     <Router>
       <Navbar user={user} setUser={setUser}/>
       <Routes>
-        <Route path="/" element={<Home user={user} error={error}/>}></Route>
+        <Route path="/" element={<Home user={user} setUser={setUser} error={error}/>}></Route>
         <Route path="/login" element={user ? <Navigate to="/" /> : <Login setUser={setUser}/>}></Route>
         <Route path="/register" element={user ? <Navigate to="/" /> : <Register setUser={setUser}/>}></Route>
         <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/" /> }></Route>
