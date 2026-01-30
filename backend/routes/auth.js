@@ -76,6 +76,27 @@ router.post('/login', async (req, res) => {
     }
 })
 
+// Route to handle userName change
+router.post('/update', async (req, res) => {
+    const {username, id} = req.body;
+
+    console.log(`the request body fields: ${username} ${id}`);
+    if (!username) {
+        return res.status(400).json({ message: 'Username is required' });
+    }
+    try {
+        // update the Db first
+        const updatedUser = await User.findByIdAndUpdate(id, {username},{ new: true});
+        // then send the new user back
+        res.status(200).json({
+            username: updatedUser.username
+        });
+    } catch (error) {
+        res.status(500).json({message: "Server Error"});
+        console.log("The error in catch block was: ", error.message);
+    }
+})
+
 // route for logged in user
 // we will have to protect our routes and for that we will be using a middleware
 router.get('/self', protect, async (req, res) => {
