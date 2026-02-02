@@ -15,9 +15,17 @@ const Home = ({user, setUser, error}) => {
         try {
             // send a post request
             console.log("the user data of logged in user: ", user);
-            const res = await axios.post('/api/users/update', {username: username, id: user._id}); // username is new, id is old
-            // update only the username in frontend
-            setUser(prev => ({ ...prev, username: res.data.username}));
+
+            if(user.id != undefined){
+                const res = await axios.post('/api/users/update', {username: username, id: user.id}); // username is new, id is old
+                // update only the username in frontend
+                setUser(prev => ({ ...prev, username: res.data.username}));
+            }
+            else{
+                const res = await axios.post('/api/users/update', {username: username, id: user._id}); // username is new, id is old
+                // update only the username in frontend
+                setUser(prev => ({ ...prev, username: res.data.username}));
+            }
 
         } catch (error) {
             // catch any error
