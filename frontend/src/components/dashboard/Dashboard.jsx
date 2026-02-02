@@ -4,7 +4,7 @@ import StatsCards from './StatsCards.jsx';
 import CoursesCard from './CoursesCard.jsx';
 import './Styles/Style.css';
 import {BrowserRouter as Router, Routes, Route, Navigate, Outlet} from 'react-router';
-import ProfileInfo from './ProfileInfo.jsx';
+import Settings from './Settings.jsx';
 
 const Dashboard = () => {
     return (
@@ -21,13 +21,14 @@ const Dashboard = () => {
                             </div>
                         </>
                     } />
-                    <Route path="/settings" element={<ProfileInfo/>} />
+                    <Route path="/settings" element={<Settings/>} />
                 </Routes>
             </div>    
         </div> 
     )
 }
 
+//  //Old Dashboard layout without nested routes
 // const Dashboard = () => {
 
 //     return (

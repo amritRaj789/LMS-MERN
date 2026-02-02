@@ -1,4 +1,4 @@
-const ProfileInfo = () => {
+const Settings = () => {
     return(
         <div>
             <h1 className="">This is the Settings page</h1>
@@ -6,4 +6,4 @@ const ProfileInfo = () => {
     )
 }
 
-export default ProfileInfo;
+export default Settings;
