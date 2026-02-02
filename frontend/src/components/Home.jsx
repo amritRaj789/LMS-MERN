@@ -46,8 +46,8 @@ const Home = ({user, setUser, error}) => {
                     <h2 className="font-bold mb-6 text-gray-900"> Hello, {user.username}</h2>
                     <p className="text-gray-400">You are logged in with Email Id: {user.email}</p>
                     <div className='mt-8 rounded-lg bg-gray-200 w-sm'>
-                        <Link className='text-2xl text-white font-bold' to='/dashboard'>Checkout Dashboard</Link>
-                        <button className='my-4' onClick={() => setShowForm(!showForm)}>
+                        <Link className='text-2xl text-white font-bold p-2 rounded hover:bg-gray-300' to='/dashboard'>Checkout Dashboard</Link>
+                        <button className='my-4 bg-gray-200 rounded hover:bg-gray-300' onClick={() => setShowForm(!showForm)}>
                             Change Username
                         </button>
                         {showForm && (
