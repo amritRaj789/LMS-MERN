@@ -5,6 +5,7 @@ const Sidebar = () => {
   let navigate = useNavigate();
 
   const handleItemClick = (e) => {
+    console.log("List item onclick event.target, ", e.target);
     const value = e.target.dataset.value;
     console.log("Clicked on Settings");
     if(value == "settings"){

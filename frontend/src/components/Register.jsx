@@ -94,7 +94,7 @@ const Register = ({setUser}) => {
       </div>
 
       <button className="btn-primary">Register</button>
-      <button className="login btn-secondary" onClick={() => navigate('/login')}>Already Registered? Login</button>
+      <button className="login btn-secondary hover:bg-blue-100" onClick={() => navigate('/login')}>Already Registered? Login</button>
     </form>
   );
 };

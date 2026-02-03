@@ -1,0 +1,82 @@
+.settings-page {
+  background-color: white;
+  padding: 24px;
+  border-radius: 12px;
+}
+
+.settings-title {
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.settings-container {
+  display: flex;
+  gap: 30px;
+}
+
+.settings-list {
+  list-style: none;
+  width: 220px;
+  border-right: 1px solid #e5e7eb;
+}
+
+.settings-list li {
+  padding: 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  text-align: left;
+}
+
+.settings-list li:hover {
+  background-color: #f1f5f9;
+}
+
+.settings-list li.active {
+  background-color: #e0f2fe;
+  font-weight: 500;
+}
+
+.settings-form {
+  flex: 1;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.settings-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 16px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-save {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-cancel {
+  background-color: #e5e7eb;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.settings-placeholder {
+  color: #64748b;
+}

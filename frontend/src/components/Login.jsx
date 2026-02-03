@@ -58,7 +58,7 @@ const Login = ({setUser}) => {
       </div>
 
       <button className="btn-primary">Login</button>
-      <button className="btn-secondary">Forgot Password?</button>
+      <button className="btn-secondary hover:bg-blue-100">Forgot Password?</button>
     </form>
   );
 };
