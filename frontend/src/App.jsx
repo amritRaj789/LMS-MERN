@@ -51,7 +51,7 @@ function App (){
         <Route path="/" element={<Home user={user} setUser={setUser} error={error}/>} />
         <Route path="/login" element={user ? <Navigate to="/" /> : <Login setUser={setUser}/>} />
         <Route path="/register" element={user ? <Navigate to="/" /> : <Register setUser={setUser}/>} />
-        <Route path="/dashboard/*" element={user ? <Dashboard /> : <Navigate to="/" /> } />
+        <Route path="/dashboard/*" element={user ? <Dashboard user={user} setUser={setUser}/> : <Navigate to="/" /> } />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </Router>

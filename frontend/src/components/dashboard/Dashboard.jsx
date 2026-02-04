@@ -6,7 +6,7 @@ import './Styles/Style.css';
 import {BrowserRouter as Router, Routes, Route, Navigate, Outlet} from 'react-router';
 import Settings from './Settings.jsx';
 
-const Dashboard = () => {
+const Dashboard = ({user, setUser}) => {
     return (
         <div className='app'>
             <Sidebar />
@@ -21,7 +21,7 @@ const Dashboard = () => {
                             </div>
                         </>
                     } />
-                    <Route path="/settings" element={<Settings/>} />
+                    <Route path="/settings" element={<Settings user={user} setUser={setUser}/>} />
                 </Routes>
             </div>    
         </div> 
