@@ -40,6 +40,18 @@ userSchema.methods.matchPassword =  async function (enteredPassword){
     return await bcrypt.compare(enteredPassword, this.password); // bcrypt internally hashes the entered password to compare with stored
 }
 
+// custom method to update the password
+userSchema.methods.updatePassword =  async function (newPassword){
+    //console.log("Inside updatePassword");
+    // const salt = await bcrypt.genSalt(10) // 10 is the default saltrounds
+    // this.password = await bcrypt.hash(newPassword, salt); // this stores the hash of a password in our DB
+    
+    // we can simply pass the new password and the pre-save hook will hash it and then store it by itself
+    this.password = newPassword;
+    return await this.save();
+
+}
+
 const User = mongoose.model("User", userSchema);
 
 export default User;

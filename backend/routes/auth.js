@@ -97,6 +97,33 @@ router.post('/update', async (req, res) => {
     }
 })
 
+// route for password change
+router.post('/password-change', async (req, res) => {
+    const {oldPassword, newPassword, email} = req.body;
+    console.log("The request body is: ", req.body);
+    console.log(`the request body fields: ${oldPassword} ${newPassword} ${email}`);
+
+    try {
+        console.log("Inside try block of password-change route");
+        // retrieve user from DB
+        const user = await User.findOne({email: email});
+        console.log("Retrieved user from db: ", user);
+
+        // check if user exists and password is correct
+        if(!user || !(await user.matchPassword(oldPassword))){
+            return res.status(401).json({message: "Invalid credentials"});
+        }
+        // hash and save the new password
+        const result = await user.updatePassword(newPassword);
+        console.log("Result is: ", result);
+        res.status(200).json({message: "Password changed successfully"});
+    } catch (error) {
+        res.status(500).json({message: "Server error while updating password"});
+        console.log("Error in catch block: ", error);
+    }
+
+})
+
 // route for logged in user
 // we will have to protect our routes and for that we will be using a middleware
 router.get('/self', protect, async (req, res) => {
