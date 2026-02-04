@@ -8,7 +8,7 @@ import Register from "./components/Register";
 import Navbar from "./components/Navbar";
 import PageNotFound from "./components/PageNotFound";
 import Dashboard from "./components/dashboard/Dashboard";
-
+import { ToastContainer, Bounce } from 'react-toastify';
 
 
 function App (){
@@ -54,6 +54,19 @@ function App (){
         <Route path="/dashboard/*" element={user ? <Dashboard user={user} setUser={setUser}/> : <Navigate to="/" /> } />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+      />
     </Router>
   )
 }

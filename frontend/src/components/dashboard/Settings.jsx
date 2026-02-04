@@ -2,6 +2,7 @@ import {useState} from "react";
 //import './Styles/Settings.css';
 import axios from 'axios';
 import { useNavigate } from "react-router";
+import {toast, Bounce} from 'react-toastify';
 
 
 const Settings = ({user, setUser}) => {
@@ -22,6 +23,46 @@ const Settings = ({user, setUser}) => {
         navigate('/');
     }
 
+    const showToastMsg = (type) => {
+        if(type == 'success'){
+            toast.success('Password changed successfully!', {
+                position: "top-right",
+                autoClose: 1500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
+            toast.info('Please log in again!', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            })
+        }
+        else if(type == 'error'){
+            toast.error('Error! Failed to update!', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
+        }
+    }
+
     const handlePasswordChange = async (e) => {
         e.preventDefault();
         console.log(`Password values: ${oldPassword}; ${newPassword}; ${newPasswordConfirm}`);
@@ -36,12 +77,17 @@ const Settings = ({user, setUser}) => {
             // send axios request with old and new password also the email to identify
             const res = await axios.post('/api/users/password-change', {oldPassword, newPassword, email: user.email});
             console.log("The response from backend: ", res.data);
-
+            
+            // show toast
+            showToastMsg("success");
+            
+            // logout user
             handleLogout();        
             
         } catch (error) {
             // catch errors
             console.log("Error in catch block while updating password: ", error);
+            showToastMsg("error");
         }
     }
 
