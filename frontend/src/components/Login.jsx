@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import {useNavigate} from 'react-router';
+import {toast, Bounce} from 'react-toastify';
 
 const Login = ({setUser}) => {
   const [loginData, setLoginData] = useState({
@@ -11,6 +12,35 @@ const Login = ({setUser}) => {
   const [error, setError] = useState("");
 
   let navigate = useNavigate();
+
+  const showToastMsg = (type) => {
+    if(type == 'invalid-cred'){
+      toast.error('Error! Invalid Credentials', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+      });
+    }
+    else if(type == 'other'){
+      toast.error('Internal Error! Failed to update!', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+      });
+    }
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,17 +61,16 @@ const Login = ({setUser}) => {
       setUser(res.data);
       // going back to home
       navigate('/');
-    } catch(err){
-      setError(err.response?.data?.message || "Login Failed");
+    } catch(err){      
+      const errorMsg = err.response?.data?.message || undefined;
+      errorMsg == 'Invalid credentials' ? showToastMsg('invalid-cred') : showToastMsg('other');
+      
       // remove any token from prev login
       localStorage.removeItem("token");
       setLoginData({
         email: "",
         password: "",
       });
-      window.alert("Incorrect Email/Password");
-      //console.alert("Couldn't login, ", err.message);
-
     }
   };
 
