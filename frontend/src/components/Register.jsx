@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import {toast, Bounce, Zoom} from 'react-toastify';
 
 const Register = ({setUser}) => {
   const [formData, setFormData] = useState({
@@ -16,7 +17,7 @@ const Register = ({setUser}) => {
   let navigate = useNavigate();
 
   const validateForm = (data) => {
-    let {email, password, phone, address} = data;
+    let {password, phone, address} = data;
     // html forms is already doing email check, may skip
     // if(!email.includes('@') || !email.includes('.com')) return "Please check Email Id";
     if(password.length < 9) return "Password must be longer than 8 characters";
@@ -29,6 +30,48 @@ const Register = ({setUser}) => {
 
   }
 
+  const showToastMsg = (type, msg) => {
+    if(type == 'validation'){
+      toast.error(msg, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+      });
+    }
+    else if(type == 'server'){
+      toast.error(msg, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+      });
+    }
+    else if(type == 'success'){
+      toast.success(msg, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Zoom,
+      });
+    }
+  }
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,14 +80,16 @@ const Register = ({setUser}) => {
 
   
   const handleRegister = async (e) => {
+
     e.preventDefault();
     console.log("Inside handleRegister : ", formData);
 
     // validate form first
     const formValidationMsg = validateForm(formData);
-    // console.log("validation message", formValidationMsg);
+
     if(formValidationMsg != "All correct"){
-      window.alert(formValidationMsg);
+      // show toast with proper msg
+      showToastMsg('validation', formValidationMsg);
     }
     else{
       try {
@@ -55,11 +100,17 @@ const Register = ({setUser}) => {
         setUser(res.data);
         localStorage.setItem("token", res.data.token);
         
+        // show toast on success
+        showToastMsg('success', 'User registered successfully!');
+
         navigate('/');
       } catch (err) {
-        // may also setError
-        console.log("Couldn't Register User. ", err.message);
-        //setError(err.response?.data?.message || "Registration Failed");
+        //console.log("Couldn't Register User. Error obj", err);
+
+        const errMsg = err.response?.data?.message || undefined;
+        errMsg == "User already exists!" ? 
+          (showToastMsg('server', 'Email Id already registered!')) 
+          : (showToastMsg('server', 'Server Error! Try again!')) ;
       }
     }  
   };
