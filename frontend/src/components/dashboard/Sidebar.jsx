@@ -7,7 +7,6 @@ const Sidebar = () => {
   const handleItemClick = (e) => {
 
     const value = e.target.dataset.value;
-    console.log("Clicked on Settings");
     if(value == "settings"){
       navigate('/dashboard/settings');
     }

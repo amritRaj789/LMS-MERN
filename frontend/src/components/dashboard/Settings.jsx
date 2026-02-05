@@ -155,7 +155,7 @@ const Settings = ({user, setUser}) => {
                 </div>
 
                 <button className="btn-primary">Save</button>
-                <button type="reset" className="btn-secondary hover:bg-red-200">Cancel</button>
+                <button className="btn-secondary hover:bg-red-200">Cancel</button>
             </form>
         </div>
         </>

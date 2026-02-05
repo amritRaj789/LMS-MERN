@@ -3,7 +3,7 @@ import Sidebar from './Sidebar.jsx';
 import StatsCards from './StatsCards.jsx';
 import CoursesCard from './CoursesCard.jsx';
 import './Styles/Style.css';
-import {BrowserRouter as Router, Routes, Route, Navigate, Outlet} from 'react-router';
+import {BrowserRouter as Router, Routes, Route} from 'react-router';
 import Settings from './Settings.jsx';
 
 const Dashboard = ({user, setUser}) => {
@@ -30,7 +30,6 @@ const Dashboard = ({user, setUser}) => {
 
 //  //Old Dashboard layout without nested routes
 // const Dashboard = () => {
-
 //     return (
 //     <div className="app">
 //         <Sidebar />
@@ -43,7 +42,6 @@ const Dashboard = ({user, setUser}) => {
 //         </div>
 //      </div>
 //     )
-
 // }
 
 export default Dashboard;

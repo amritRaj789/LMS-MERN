@@ -69,8 +69,8 @@ const Home = ({user, setUser, error}) => {
                     <h2 className="text-lg font-bold mb-6 text-gray-900">User not logged in</h2>
                     <p className='text-lg text-gray-900'>Kindly Register or Login to proceed</p>
                     <div className='my-4'>
-                        <Link className='w-full bg-blue-200 text-white p-2 mx-2 rounded-md hover:bg-blue-600 font-medium' to="/login">Login</Link>
-                        <Link className='w-full bg-blue-200 text-white p-2 mx-2 rounded-md hover:bg-blue-600 font-medium' to="/register">Register</Link>
+                        <Link className='w-full bg-blue-200 text-white p-2 mx-2 rounded-md hover:bg-blue-300 font-medium' to="/login">Login</Link>
+                        <Link className='w-full bg-blue-200 text-white p-2 mx-2 rounded-md hover:bg-blue-300 font-medium' to="/register">Register</Link>
                     </div>
                 </div>)
             }

@@ -59,9 +59,9 @@ function App (){
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop
-        closeOnClick={false}
+        closeOnClick
         rtl={false}
-        pauseOnFocusLoss
+        pauseOnFocusLoss={false}
         draggable
         pauseOnHover
         theme="light"
