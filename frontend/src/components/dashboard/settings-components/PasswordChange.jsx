@@ -71,8 +71,7 @@ const PasswordChange = ({user, setUser}) => {
             }
             console.log("The email before sending is: ", user.email);
             // send axios request with old and new password also the email to identify
-            const res = await axios.post('/api/users/password-change', {oldPassword, newPassword, email: user.email});
-            // console.log("The response from backend: ", res.data);
+            await axios.post('/api/users/password-change', {oldPassword, newPassword, email: user.email});
             
             // show toast
             showToastMsg("success");

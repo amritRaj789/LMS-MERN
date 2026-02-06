@@ -1,7 +1,6 @@
 import {BrowserRouter as Router, Routes, Route, useNavigate} from 'react-router';
 import arrowIcon from "./right-arrow.png";
 //import {useState} from "react";
-//import './styles/Settings.css';
 import PasswordChange from "./settings-components/PasswordChange";
 
 
