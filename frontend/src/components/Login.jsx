@@ -28,7 +28,7 @@ const Login = ({setUser}) => {
       });
     }
     else if(type == 'other'){
-      toast.error('Internal Error! Failed to update!', {
+      toast.error('Internal Error! Failed to login!', {
           position: "top-right",
           autoClose: 2000,
           hideProgressBar: false,

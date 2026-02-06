@@ -82,7 +82,10 @@ const PasswordChange = ({user, setUser}) => {
         } catch (error) {
             // catch errors
             console.log("Error in catch block while updating password: ", error);
-            showToastMsg("error", 'Error! Failed to update!');
+            const statusCode = error.response.status;
+
+            if(statusCode == 429) showToastMsg("error", "Max attempts exceeded! Try again after 1 hour");
+            else showToastMsg("error", 'Error! Failed to update!');
         }
     }
 
