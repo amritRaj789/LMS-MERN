@@ -2,7 +2,7 @@ import Navbar from './Navbar.jsx';
 import Sidebar from './Sidebar.jsx';
 import StatsCards from './StatsCards.jsx';
 import CoursesCard from './CoursesCard.jsx';
-import './Styles/Style.css';
+import './styles/Style.css';
 import {BrowserRouter as Router, Routes, Route} from 'react-router';
 import Settings from './Settings.jsx';
 
@@ -21,7 +21,7 @@ const Dashboard = ({user, setUser}) => {
                             </div>
                         </>
                     } />
-                    <Route path="/settings" element={<Settings user={user} setUser={setUser}/>} />
+                    <Route path="/settings/*" element={<Settings user={user} setUser={setUser}/>} />
                 </Routes>
             </div>    
         </div> 

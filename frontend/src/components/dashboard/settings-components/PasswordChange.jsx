@@ -1,4 +1,3 @@
-import React from "react";
 import {useState} from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router";
@@ -8,8 +7,6 @@ const PasswordChange = ({user, setUser}) => {
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
-
-    // const [showForm, setShowForm] = useState(false);
 
     let navigate = useNavigate();
 
@@ -22,11 +19,11 @@ const PasswordChange = ({user, setUser}) => {
         navigate('/');
     }
 
-    const showToastMsg = (type) => {
+    const showToastMsg = (type, msg) => {
         if(type == 'success'){
             toast.success('Password changed successfully!', {
                 position: "top-right",
-                autoClose: 1500,
+                autoClose: 3500,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: false,
@@ -37,7 +34,7 @@ const PasswordChange = ({user, setUser}) => {
             });
             toast.info('Please log in again!', {
                 position: "top-right",
-                autoClose: 3000,
+                autoClose: 1500,
                 hideProgressBar: false,
                 closeOnClick: false,
                 pauseOnHover: false,
@@ -48,7 +45,7 @@ const PasswordChange = ({user, setUser}) => {
             })
         }
         else if(type == 'error'){
-            toast.error('Error! Failed to update!', {
+            toast.error(msg, {
                 position: "top-right",
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -68,14 +65,14 @@ const PasswordChange = ({user, setUser}) => {
         try {
             // check new password matches
             if(newPassword !== newPasswordConfirm){
-                window.alert("Passwords do not match!");
+                showToastMsg("error", "Passwords do not match!");
                 setNewPasswordConfirm("");
                 return;
             }
             console.log("The email before sending is: ", user.email);
             // send axios request with old and new password also the email to identify
             const res = await axios.post('/api/users/password-change', {oldPassword, newPassword, email: user.email});
-            console.log("The response from backend: ", res.data);
+            // console.log("The response from backend: ", res.data);
             
             // show toast
             showToastMsg("success");
@@ -86,7 +83,7 @@ const PasswordChange = ({user, setUser}) => {
         } catch (error) {
             // catch errors
             console.log("Error in catch block while updating password: ", error);
-            showToastMsg("error");
+            showToastMsg("error", 'Error! Failed to update!');
         }
     }
 
