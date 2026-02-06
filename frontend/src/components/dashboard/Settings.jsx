@@ -2,6 +2,7 @@ import {BrowserRouter as Router, Routes, Route, useNavigate} from 'react-router'
 import arrowIcon from "./right-arrow.png";
 //import {useState} from "react";
 import PasswordChange from "./settings-components/PasswordChange";
+import UsernameChange from './settings-components/UsernameChange';
 
 
 const Settings = ({user, setUser}) => {
@@ -46,6 +47,7 @@ const Settings = ({user, setUser}) => {
         </div>
       } />
       <Route path="/change-password" element={<PasswordChange user={user} setUser={setUser}/>}/>
+      <Route path="/change-username" element={<UsernameChange user={user} setUser={setUser}/>}/>
     </Routes>
 
     
