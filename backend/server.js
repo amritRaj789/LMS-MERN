@@ -20,36 +20,37 @@ const apiLimiter = rateLimit({
 })
 
 // authentication limiter
-// const authLimiter = rateLimit({
-// 	windowMs: 15 * 60 * 1000,
-// 	limit: 5,
-// 	standardHeaders: 'draft-8',
-// 	legacyHeaders: false,
-// 	ipv6Subnet: 56,
-// })
+const authLimiter = rateLimit({
+	windowMs: 15 * 60 * 1000,
+	limit: 5,
+	standardHeaders: 'draft-8',
+	legacyHeaders: false,
+	ipv6Subnet: 56,
+})
 
 // passwordChange limiter
-// const strictLimiter = rateLimit({
-// 	windowMs: 60 * 60 * 1000, // 1 hr window
-// 	limit: 3,
-// 	standardHeaders: 'draft-8',
-// 	legacyHeaders: false,
-// 	ipv6Subnet: 56,
-// })
+const strictLimiter = rateLimit({
+	windowMs: 15 * 60 * 1000, // 15 min window
+	limit: 2,
+	standardHeaders: 'draft-8',
+	legacyHeaders: false,
+	ipv6Subnet: 56,
+})
 
 const app = express();
 
 
-// rate-limited middleware
-app.use(limiter);
-// app.use('/api/users/login', authLimiter);
-// app.use('/api/users/register', authLimiter);
-// app.use('/api/users/password-change', strictLimiter);
+
 
 // body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
+// rate-limiter middleware
+// app.use('api/', apiLimiter);
+// app.use('/api/users/login', authLimiter);
+// app.use('/api/users/register', authLimiter);
+app.use('/api/users/password-change', strictLimiter);
 
 // using our routes that we have in separate files
 app.use('/api/users', authRoutes);
